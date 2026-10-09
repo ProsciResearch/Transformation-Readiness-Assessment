@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Transformation Readiness Assessment · Prosci</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --damson:#350944;--damson-800:#5D3A69;--damson-600:#866B8F;--damson-200:#D7CEDA;--damson-100:#EBE7EC;--damson-50:#F5F3F6;
+  --ink:#1a1a1a;--linen:#F6F4ED;--sand:#F2E8DE;--surface:#FFFEFA;
+  --teal:#0E665E;--red:#C40B0E;--orange:#E27225;
+  --border:#E5E1DB;--border-strong:#C8C2B8;--border-muted:#F0ECE6;
+  --band-high-bg:#F3CECF;--band-high-fg:#A3090C;
+  --band-watch-bg:#FCEDD4;--band-watch-fg:#8A5E0C;
+  --band-strong-bg:#D6EAE7;--band-strong-fg:#0E665E;
+  --on-damson:#FFFEFA;
+  --shadow:0 1px 3px rgba(53,9,68,.06),0 8px 24px rgba(53,9,68,.04);
+  --serif:'Libre Baskerville',Georgia,'Times New Roman',serif;
+  --sans:'Instrument Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --damson:#E3D4EA;--damson-800:#C9B3D3;--damson-600:#A58FAF;--damson-200:#4A2C57;--damson-100:#33203C;--damson-50:#2A1B31;
+    --ink:#ECE8E1;--linen:#17121A;--sand:#231B27;--surface:#1E1822;
+    --teal:#5FB8AE;--red:#F07B7D;--orange:#F0A06A;
+    --border:#3A3040;--border-strong:#554A5C;--border-muted:#2C2431;
+    --band-high-bg:#4A1C1F;--band-high-fg:#FFB3B5;
+    --band-watch-bg:#45351A;--band-watch-fg:#F7CD85;
+    --band-strong-bg:#173B37;--band-strong-fg:#8FD6CD;
+    --on-damson:#1E1822;
+    --shadow:0 1px 3px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --damson:#E3D4EA;--damson-800:#C9B3D3;--damson-600:#A58FAF;--damson-200:#4A2C57;--damson-100:#33203C;--damson-50:#2A1B31;
+  --ink:#ECE8E1;--linen:#17121A;--sand:#231B27;--surface:#1E1822;
+  --teal:#5FB8AE;--red:#F07B7D;--orange:#F0A06A;
+  --border:#3A3040;--border-strong:#554A5C;--border-muted:#2C2431;
+  --band-high-bg:#4A1C1F;--band-high-fg:#FFB3B5;
+  --band-watch-bg:#45351A;--band-watch-fg:#F7CD85;
+  --band-strong-bg:#173B37;--band-strong-fg:#8FD6CD;
+  --on-damson:#1E1822;
+  --shadow:0 1px 3px rgba(0,0,0,.3);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 88px);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--linen);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{color:var(--damson);margin:0}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(28px,4.4vw,40px);line-height:1.18;letter-spacing:-.01em}
+h2{font-family:var(--sans);font-weight:600;font-size:20px;line-height:1.3}
+h3{font-family:var(--sans);font-weight:600;font-size:17px;line-height:1.35}
+p{margin:0}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--damson);outline-offset:2px;border-radius:6px}
+
+.shell{max-width:1160px;margin:0 auto;padding:40px 28px 64px;display:grid;grid-template-columns:260px minmax(0,1fr);gap:40px;align-items:start}
+
+/* Header */
+.masthead{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;padding-bottom:28px;border-bottom:1px solid var(--border)}
+.brand{font-weight:600;color:var(--damson);font-size:14px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.brand-mark{width:10px;height:10px;border-radius:50%;background:var(--damson)}
+.lede{font-family:var(--serif);font-style:italic;color:var(--damson-800);font-size:17px;margin-top:10px;max-width:60ch}
+.head-actions{display:flex;gap:8px}
+
+/* Rail */
+.rail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px)}
+.rail-card{background:var(--surface);border-radius:14px;box-shadow:var(--shadow);padding:20px}
+.rail-title{font-weight:600;color:var(--damson);font-size:14px;margin-bottom:4px}
+.rail-sub{font-size:12.5px;color:var(--damson-600);margin-bottom:16px}
+.gauge{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.gauge a{display:block;color:inherit;text-decoration:none;border-radius:8px;padding:4px 6px;margin:-4px -6px}
+.gauge a:hover{background:var(--damson-50)}
+.g-row{display:flex;justify-content:space-between;font-size:13px;gap:8px}
+.g-name{color:var(--ink);font-weight:500}
+.g-val{color:var(--damson-600);font-variant-numeric:tabular-nums;white-space:nowrap}
+.g-track{height:8px;border-radius:99px;background:var(--border-muted);margin-top:6px;position:relative;overflow:hidden}
+.g-fill{position:absolute;inset:0 auto 0 0;width:0;border-radius:99px;background:var(--damson-200);transition:width .35s ease,background .35s}
+.g-fill.high{background:var(--red)}.g-fill.watch{background:var(--orange)}.g-fill.strong{background:var(--teal)}
+.gauge li.leak .g-name::after{content:"Lowest";margin-left:8px;font-size:11px;font-weight:600;padding:1px 8px;border-radius:99px;background:var(--band-high-bg);color:var(--band-high-fg)}
+.rail-progress{margin-top:18px;padding-top:14px;border-top:1px solid var(--border-muted);font-size:12.5px;color:var(--damson-600)}
+.rail-progress strong{color:var(--damson);font-weight:600}
+
+/* Main */
+main{display:flex;flex-direction:column;gap:28px;min-width:0}
+.card{background:var(--surface);border-radius:14px;box-shadow:var(--shadow);padding:28px}
+.howto{background:var(--sand);border-radius:14px;padding:22px 26px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:start}
+.howto-key{font-family:var(--serif);font-size:44px;line-height:1;color:var(--damson)}
+.howto p+p{margin-top:8px}
+.howto em{font-style:normal;font-weight:600;color:var(--damson)}
+
+.sec-head{display:flex;gap:16px;align-items:baseline;margin-bottom:6px}
+.sec-num{font-family:var(--serif);font-size:15px;color:var(--damson-600);min-width:26px}
+.sec-desc{color:var(--damson-800);margin:0 0 20px 42px;font-size:14.5px}
+.sec-desc b{font-weight:600}
+
+/* Fields */
+.field{margin:0 0 18px 42px}
+.field:last-child{margin-bottom:0}
+.field label{display:block;font-weight:600;font-size:14px;color:var(--damson);margin-bottom:6px}
+.field textarea,.field input{width:100%;font-family:var(--sans);font-size:15px;color:var(--ink);background:var(--linen);border:1px solid var(--border);border-radius:10px;padding:11px 13px;resize:vertical;line-height:1.45}
+.field textarea{min-height:64px}
+.field textarea:focus,.field input:focus{outline:none;border-color:var(--damson);box-shadow:0 0 0 3px var(--damson-100)}
+.field ::placeholder{color:var(--damson-600)}
+
+/* Factor */
+.factor-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.subtotal{text-align:right;flex-shrink:0}
+.subtotal-num{font-family:var(--serif);font-size:28px;color:var(--damson);line-height:1;font-variant-numeric:tabular-nums}
+.subtotal-num small{font-family:var(--sans);font-size:13px;color:var(--damson-600)}
+.statements{list-style:none;margin:0 0 0 42px;padding:0}
+.stmt{padding:16px 0;border-top:1px solid var(--border-muted);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center}
+.stmt:first-child{border-top:none;padding-top:4px}
+.stmt-text{font-size:15px}
+.scale{display:flex;flex-direction:column;align-items:stretch;gap:4px}
+.scale-btns{display:flex;gap:6px}
+.scale-btns button{width:40px;height:40px;border-radius:10px;border:1px solid var(--border-strong);background:var(--surface);color:var(--damson);font-weight:600;font-size:15px;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+.scale-btns button:hover{background:var(--damson-50);border-color:var(--damson-600)}
+.scale-btns button[aria-checked="true"]{background:var(--damson);border-color:var(--damson);color:var(--on-damson)}
+.scale-ends{display:flex;justify-content:space-between;font-size:11.5px;color:var(--damson-600)}
+
+.band{display:inline-block;padding:3px 11px;border-radius:99px;font-size:12px;font-weight:600;white-space:nowrap}
+.band.high{background:var(--band-high-bg);color:var(--band-high-fg)}
+.band.watch{background:var(--band-watch-bg);color:var(--band-watch-fg)}
+.band.strong{background:var(--band-strong-bg);color:var(--band-strong-fg)}
+.band.pending{background:var(--damson-100);color:var(--damson-800)}
+
+/* Profile */
+.profile-wrap{margin-left:42px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+thead th{background:var(--sand);color:var(--damson);font-weight:600;text-align:left;padding:11px 14px;font-size:13px;border-bottom:2px solid var(--border)}
+tbody td{padding:12px 14px;border-bottom:1px solid var(--border-muted);vertical-align:middle}
+td.num{font-variant-numeric:tabular-nums;font-weight:600;color:var(--damson)}
+tr.is-lowest td{background:var(--damson-50)}
+tr.is-lowest td:first-child{box-shadow:inset 3px 0 0 var(--red)}
+.legend{margin:14px 0 0 42px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--damson-800)}
+
+/* Verdict */
+.verdict{margin-left:42px;border-radius:12px;border:1px solid var(--border);padding:22px 24px;background:var(--linen)}
+.verdict.ready{border-color:var(--damson-200);background:var(--damson-50)}
+.verdict-label{font-size:13px;color:var(--damson-600);font-weight:500;margin-bottom:6px}
+.verdict-factor{font-family:var(--serif);font-size:24px;color:var(--damson);line-height:1.25}
+.verdict-move{margin-top:12px;font-size:16px;max-width:62ch}
+.verdict + .verdict{margin-top:12px}
+.moves{margin:22px 0 0 42px}
+.moves summary{cursor:pointer;color:var(--damson);font-weight:500;font-size:14px}
+.moves table{margin-top:12px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:9px;font-weight:500;font-size:14px;cursor:pointer;border:1px solid var(--damson);transition:background .15s}
+.btn-primary{background:var(--damson);color:var(--on-damson)}
+.btn-primary:hover{background:var(--damson-800)}
+.btn-secondary{background:transparent;color:var(--damson)}
+.btn-secondary:hover{background:var(--damson-50)}
+.btn-ghost{border-color:transparent;background:transparent;color:var(--damson-800)}
+.btn-ghost:hover{background:var(--damson-50)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 0 42px}
+.toast{margin:12px 0 0 42px;font-size:13.5px;color:var(--teal);min-height:1.2em}
+.fallback{margin:12px 0 0 42px;display:none}
+.fallback textarea{width:100%;min-height:220px;font-family:var(--sans);font-size:13px;background:var(--linen);color:var(--ink);border:1px solid var(--border);border-radius:10px;padding:12px}
+
+footer{grid-column:1/-1;border-top:1px solid var(--border);padding-top:20px;font-size:12.5px;color:var(--damson-600);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer em{font-style:italic}
+
+/* Responsive */
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr;gap:24px;padding:24px 16px 48px}
+  .rail{position:sticky;top:0;z-index:5;margin:0 -16px;padding-top:env(safe-area-inset-top,0px);background:var(--linen)}
+  .rail-card{border-radius:0;box-shadow:0 1px 0 var(--border);padding:12px 16px}
+  .rail-title,.rail-sub,.rail-progress{display:none}
+  .gauge{flex-direction:row;gap:8px}
+  .gauge li{flex:1;min-width:0}
+  .g-name{font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .g-val{display:none}
+  .g-row{justify-content:center}
+  .gauge li.leak .g-name::after{display:none}
+  .gauge li.leak .g-track{box-shadow:0 0 0 2px var(--red)}
+  .g-track{margin-top:4px}
+  .masthead{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .card{padding:20px}
+  .sec-desc,.field,.statements,.profile-wrap,.legend,.verdict,.moves,.actions,.toast,.fallback{margin-left:0}
+  .stmt{grid-template-columns:1fr;gap:10px}
+  .scale-btns button{flex:1;width:auto;height:44px}
+  .howto{grid-template-columns:1fr}
+  .howto-key{display:none}
+  .subtotal-num{font-size:24px}
+}
+@media print{
+  .rail,.head-actions,.actions,.toast,.fallback,.moves{display:none!important}
+  .shell{display:block;padding:0}
+  .card{box-shadow:none;border:1px solid #ddd;break-inside:avoid;margin-bottom:12px}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <header class="masthead">
+    <div>
+      <div class="brand"><span class="brand-mark" aria-hidden="true"></span>Prosci</div>
+      <h1>Transformation Readiness Assessment</h1>
+      <p class="lede">Where is your critical transformation leaking its return — and what will you do about it?</p>
+    </div>
+    <div class="head-actions">
+      <button class="btn btn-ghost" id="resetTop" type="button">Start over</button>
+    </div>
+  </header>
+
+  <aside class="rail" aria-label="Live readiness profile">
+    <div class="rail-card">
+      <div class="rail-title">Your readiness profile</div>
+      <div class="rail-sub">Updates as you score. Watch the lowest bar.</div>
+      <ul class="gauge" id="gauge"></ul>
+      <div class="rail-progress" id="railProgress"></div>
+    </div>
+  </aside>
+
+  <main>
+    <section class="howto" aria-label="How to use this assessment">
+      <div class="howto-key" aria-hidden="true">1–5</div>
+      <div>
+        <p>Pick the <em>one</em> critical transformation you came in worried about, and score it — not your organization in general. Rate each statement 1 (not true) to 5 (fully true).</p>
+        <p>Then read your <em>lowest</em> factor, not your average. A single weak factor is where the return leaks out.</p>
+      </div>
+    </section>
+
+    <div id="factors" style="display:contents"></div>
+
+    <section class="card" id="profile" aria-labelledby="profile-h">
+      <div class="sec-head"><span class="sec-num">7</span><h2 id="profile-h">Your readiness profile</h2></div>
+      <p class="sec-desc">Each factor is banded automatically. Read your lowest factor — that is where the return you promised is most likely to leak, and where your one move belongs.</p>
+      <div class="profile-wrap">
+        <table>
+          <thead><tr><th scope="col">Factor</th><th scope="col">Subtotal / 15</th><th scope="col">Band</th></tr></thead>
+          <tbody id="profileBody"></tbody>
+        </table>
+      </div>
+      <div class="legend">
+        <span class="band high">High exposure 3–7</span>
+        <span class="band watch">Watch 8–11</span>
+        <span class="band strong">Strong 12–15</span>
+      </div>
+    </section>
+
+    <section class="card" id="move" aria-labelledby="move-h">
+      <div class="sec-head"><span class="sec-num">8</span><h2 id="move-h">Your lowest factor, your first move</h2></div>
+      <p class="sec-desc">The move framed for your value case.</p>
+      <div id="verdict"></div>
+      <details class="moves">
+        <summary>See the move for every factor</summary>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr><th scope="col">Lowest factor</th><th scope="col">The move</th></tr></thead>
+            <tbody id="movesBody"></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <section class="card" id="commit" aria-labelledby="commit-h">
+      <div class="sec-head"><span class="sec-num">9</span><h2 id="commit-h">Your commitment</h2></div>
+      <p class="sec-desc">One move, stated in business terms — the move that best protects the return you are trying to realize.</p>
+      <div class="field">
+        <label for="c_move">The one move I will make</label>
+        <textarea id="c_move" data-key="c_move" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label for="c_step">My first step</label>
+        <textarea id="c_step" data-key="c_step" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label for="c_when">By when</label>
+        <input id="c_when" data-key="c_when" type="text">
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="copyBtn" type="button">Copy my summary</button>
+        <button class="btn btn-secondary" id="resetBtn" type="button">Start over</button>
+      </div>
+      <p class="toast" id="toast" role="status" aria-live="polite"></p>
+      <div class="fallback" id="fallback">
+        <p style="font-size:13px;color:var(--damson-800);margin-bottom:8px">Select all and copy the text below.</p>
+        <textarea id="fallbackText" readonly></textarea>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span><em>Grounded in Prosci research (Unlocking ERP Implementations 2025; Best Practices in Change Management 12th Edition; State of AI Adoption 2026; executive engagement studies). For participant use in session.</em></span>
+    <span>© 2026 Prosci Inc.</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var FACTORS = [
+    {id:1, name:"Executive ownership of the outcome", short:"Executive ownership", rail:"Owner",
+     what:"Active, visible senior ownership driving to the promised result.",
+     items:[
+       "The executive sponsor is visible to the whole affected organization on a regular cadence — not just at launch.",
+       "The sponsor is actively building a coalition of peer leaders behind this, not carrying it alone.",
+       "Leadership is not a source of quiet resistance — hesitation, mixed signals, or letting this slip against competing demands."
+     ],
+     move:"Put the sponsor on a visible cadence and align peers on the strategic goal; lead with business-goal alignment and ROI evidence."},
+    {id:2, name:"Funding the adoption that delivers the value", short:"Adoption funding", rail:"Funding",
+     what:"Adoption resourced like the return depends on it.",
+     items:[
+       "Adoption and capability-building have a named owner and a real budget line, comparable to the technical build.",
+       "We've planned for the post-go-live productivity dip and capability ramp — not just the go-live.",
+       "We've resourced against people-and-process risk, rather than assuming the technology is the hard part."
+     ],
+     move:"Name an adoption owner and fund the people side as a line item defended by the benefits it protects."},
+    {id:3, name:"Capacity to realize the return", short:"Capacity", rail:"Capacity",
+     what:"Room to deliver this return on top of everything else.",
+     items:[
+       "We know how much other major change the affected group is already carrying, and this fits within it.",
+       "We've explicitly stopped, paused, or de-scoped something to make room for this.",
+       "This initiative's priority relative to competing ones is clear and agreed among leadership."
+     ],
+     move:"Make the priority call explicit and decide what stops — protect the benefits date."},
+    {id:4, name:"Line of sight to value realization", short:"Value visibility", rail:"Metrics",
+     what:"Ability to see benefits landing in time to protect them.",
+     items:[
+       "We've defined 2–3 adoption/outcome metrics we'll track after go-live — not just delivery milestones.",
+       "Those metrics would warn us within weeks if adoption were stalling.",
+       "Leadership reviews them on a set cadence and is ready to act on them."
+     ],
+     move:"Define 2–3 leading benefit metrics and a leadership review cadence before go-live."},
+    {id:5, name:"Time-to-value engineered, not assumed", short:"Time-to-value", rail:"Ramp",
+     what:"Proficiency built deliberately, so the return starts on time.",
+     items:[
+       "Capability-building starts well before go-live, with time to practice.",
+       "Post-go-live reinforcement has a named owner and a plan — not just a launch event.",
+       "We know what \u201cproficient\u201d looks like for each affected role, and how we'll get people there."
+     ],
+     move:"Pull proficiency-building earlier and own post-go-live reinforcement."},
+    {id:6, name:"Cultural readiness", short:"Cultural readiness", rail:"Culture",
+     what:"Progress over perfection, adaptability, and a track record of adopting change.",
+     items:[
+       "We genuinely value progress over perfection — we ship, learn, and improve rather than wait for perfect.",
+       "When conditions change, we adapt quickly, and treat new tools and ways of working as an advantage.",
+       "Our recent major changes have generally landed and stuck — we have a track record of adopting change well."
+     ],
+     move:"Don't try to fix the culture on this timeline — engineer around it with a visible early win on this change."}
+  ];
+  var TOTAL_ITEMS = FACTORS.length * 3;
+  var STORE_KEY = "tra-v1";
+
+  var state = {scores:{}, text:{}};
+  try { var saved = localStorage.getItem(STORE_KEY); if (saved) state = Object.assign(state, JSON.parse(saved)); } catch(e) {}
+  state.scores = state.scores || {}; state.text = state.text || {};
+  function save(){ try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch(e) {} }
+
+  function band(total){
+    if (total == null) return null;
+    if (total <= 7) return {cls:"high", label:"High exposure"};
+    if (total <= 11) return {cls:"watch", label:"Watch"};
+    return {cls:"strong", label:"Strong"};
+  }
+  function factorScore(f){
+    var sum = 0, n = 0;
+    for (var i=0;i<3;i++){ var v = state.scores[f.id+"-"+i]; if (v){ sum += v; n++; } }
+    return {sum:sum, answered:n, complete:n===3, total:n===3?sum:null};
+  }
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+
+  // Build factor sections
+  var host = document.getElementById("factors");
+  FACTORS.forEach(function(f){
+    var sec = document.createElement("section");
+    sec.className = "card"; sec.id = "factor-"+f.id;
+    sec.setAttribute("aria-labelledby","f"+f.id+"-h");
+    var html = '<div class="factor-head"><div><div class="sec-head"><span class="sec-num">'+f.id+'</span><h2 id="f'+f.id+'-h">'+esc(f.name)+'</h2></div>'+
+      '<p class="sec-desc"><b>What you\u2019re scoring:</b> '+esc(f.what)+'</p></div>'+
+      '<div class="subtotal"><div class="subtotal-num" id="sub-'+f.id+'">–<small> / 15</small></div><div style="margin-top:8px" id="subband-'+f.id+'"></div></div></div>'+
+      '<ol class="statements">';
+    f.items.forEach(function(text,i){
+      var key = f.id+"-"+i, lid = "s"+key;
+      html += '<li class="stmt"><p class="stmt-text" id="'+lid+'">'+esc(text)+'</p>'+
+        '<div class="scale"><div class="scale-btns" role="radiogroup" aria-labelledby="'+lid+'" data-key="'+key+'">';
+      for (var v=1; v<=5; v++){
+        html += '<button type="button" role="radio" aria-checked="false" data-v="'+v+'" aria-label="'+v+(v===1?" – not true":v===5?" – fully true":"")+'" tabindex="-1">'+v+'</button>';
+      }
+      html += '</div><div class="scale-ends" aria-hidden="true"><span>Not true</span><span>Fully true</span></div></div></li>';
+    });
+    html += '</ol>';
+    sec.innerHTML = html;
+    host.appendChild(sec);
+  });
+
+  // Moves table
+  document.getElementById("movesBody").innerHTML = FACTORS.map(function(f){
+    return '<tr><td style="white-space:nowrap;font-weight:600;color:var(--damson)">'+f.id+' · '+esc(f.short)+'</td><td>'+esc(f.move)+'</td></tr>';
+  }).join("");
+
+  // Gauge
+  document.getElementById("gauge").innerHTML = FACTORS.map(function(f){
+    return '<li id="g-'+f.id+'"><a href="#factor-'+f.id+'"><div class="g-row"><span class="g-name"><span class="g-long">'+esc(f.short)+'</span></span><span class="g-val" id="gv-'+f.id+'">– / 15</span></div>'+
+      '<div class="g-track"><div class="g-fill" id="gf-'+f.id+'"></div></div></a></li>';
+  }).join("");
+  function fitRailLabels(){
+    var narrow = window.matchMedia("(max-width:900px)").matches;
+    FACTORS.forEach(function(f){
+      document.querySelector("#g-"+f.id+" .g-long").textContent = narrow ? f.rail : f.short;
+    });
+  }
+  fitRailLabels();
+  window.addEventListener("resize", fitRailLabels);
+
+  // Radio group behaviour
+  document.querySelectorAll(".scale-btns").forEach(function(group){
+    var key = group.dataset.key;
+    var btns = Array.prototype.slice.call(group.querySelectorAll("button"));
+    function paint(){
+      var val = state.scores[key];
+      btns.forEach(function(b,i){
+        var on = Number(b.dataset.v) === val;
+        b.setAttribute("aria-checked", on ? "true" : "false");
+        b.tabIndex = (on || (!val && i===0)) ? 0 : -1;
+      });
+    }
+    group._paint = paint;
+    btns.forEach(function(b,i){
+      b.addEventListener("click", function(){
+        var v = Number(b.dataset.v);
+        state.scores[key] = (state.scores[key] === v) ? undefined : v;
+        if (state.scores[key] === undefined) delete state.scores[key];
+        paint(); save(); render();
+      });
+      b.addEventListener("keydown", function(e){
+        var idx = null;
+        if (e.key === "ArrowRight" || e.key === "ArrowUp") idx = Math.min(4, i+1);
+        if (e.key === "ArrowLeft" || e.key === "ArrowDown") idx = Math.max(0, i-1);
+        if (/^[1-5]$/.test(e.key)) idx = Number(e.key)-1;
+        if (idx !== null){ e.preventDefault(); btns[idx].focus(); btns[idx].click(); if (state.scores[key]===undefined) btns[idx].click(); }
+      });
+    });
+    paint();
+  });
+
+  // Text fields
+  document.querySelectorAll("[data-key]").forEach(function(el){
+    if (el.tagName !== "TEXTAREA" && el.tagName !== "INPUT") return;
+    el.value = state.text[el.dataset.key] || "";
+    el.addEventListener("input", function(){ state.text[el.dataset.key] = el.value; save(); });
+  });
+
+  function lowestFactors(){
+    var results = FACTORS.map(function(f){ return {f:f, s:factorScore(f)}; });
+    var complete = results.filter(function(r){ return r.s.complete; });
+    if (!complete.length) return {list:[], allDone:false, results:results};
+    var min = Math.min.apply(null, complete.map(function(r){ return r.s.total; }));
+    return {list:complete.filter(function(r){ return r.s.total===min; }), allDone:complete.length===FACTORS.length, results:results, min:min};
+  }
+
+  function render(){
+    var answered = Object.keys(state.scores).length;
+    var low = lowestFactors();
+    var lowIds = low.allDone ? low.list.map(function(r){ return r.f.id; }) : [];
+
+    low.results.forEach(function(r){
+      var f = r.f, s = r.s, b = band(s.total);
+      var sub = document.getElementById("sub-"+f.id);
+      sub.innerHTML = (s.answered ? s.sum : "–") + '<small> / 15</small>';
+      document.getElementById("subband-"+f.id).innerHTML = b ? '<span class="band '+b.cls+'">'+b.label+'</span>' :
+        '<span class="band pending">'+s.answered+' of 3 rated</span>';
+      var fill = document.getElementById("gf-"+f.id);
+      fill.style.width = (s.sum/15*100)+"%";
+      fill.className = "g-fill" + (b ? " "+b.cls : "");
+      document.getElementById("gv-"+f.id).textContent = (s.answered ? s.sum : "–") + " / 15";
+      document.getElementById("g-"+f.id).classList.toggle("leak", lowIds.indexOf(f.id) > -1);
+    });
+
+    document.getElementById("railProgress").innerHTML = answered === TOTAL_ITEMS ?
+      '<strong>All 18 statements rated.</strong> <a href="#move" style="color:var(--damson);font-weight:500">See your first move</a>' :
+      '<strong>'+answered+' of '+TOTAL_ITEMS+'</strong> statements rated';
+
+    document.getElementById("profileBody").innerHTML = low.results.map(function(r){
+      var b = band(r.s.total), isLow = lowIds.indexOf(r.f.id) > -1;
+      return '<tr class="'+(isLow?"is-lowest":"")+'"><td>'+r.f.id+' · '+esc(r.f.short)+(isLow?' <span class="band high" style="margin-left:6px">Lowest</span>':'')+'</td>'+
+        '<td class="num">'+(r.s.complete ? r.s.total : (r.s.answered ? r.s.sum+' <span style="font-weight:400;color:var(--damson-600);font-size:12.5px">(partial)</span>' : '–'))+'</td>'+
+        '<td>'+(b ? '<span class="band '+b.cls+'">'+b.label+'</span>' : '<span class="band pending">Not yet scored</span>')+'</td></tr>';
+    }).join("");
+
+    var v = document.getElementById("verdict");
+    if (!low.allDone){
+      var remaining = TOTAL_ITEMS - answered;
+      v.innerHTML = '<div class="verdict"><div class="verdict-label">Not ready yet</div><p class="verdict-move" style="margin-top:0">Rate the remaining '+remaining+' statement'+(remaining===1?'':'s')+' to reveal your lowest factor and the move that goes with it.</p></div>';
+    } else {
+      var tie = low.list.length > 1;
+      v.innerHTML = (tie ? '<p style="margin:0 0 12px 42px;font-size:14px;color:var(--damson-800)">'+low.list.length+' factors are tied at '+low.min+' / 15. Choose the one that most threatens the return you are trying to realize.</p>' : '') +
+        low.list.map(function(r){
+          var b = band(r.s.total);
+          return '<div class="verdict ready"><div class="verdict-label">Lowest factor · '+r.s.total+' / 15 · <span class="band '+b.cls+'">'+b.label+'</span></div>'+
+            '<div class="verdict-factor">'+r.f.id+' · '+esc(r.f.name)+'</div>'+
+            '<p class="verdict-move">'+esc(r.f.move)+'</p>'+
+            '<div style="margin-top:14px"><button type="button" class="btn btn-secondary use-move" data-id="'+r.f.id+'">Use this as my one move</button></div></div>';
+        }).join("");
+      v.querySelectorAll(".use-move").forEach(function(btn){
+        btn.addEventListener("click", function(){
+          var f = FACTORS.filter(function(x){ return x.id === Number(btn.dataset.id); })[0];
+          var el = document.getElementById("c_move");
+          el.value = f.move; state.text.c_move = f.move; save();
+          document.getElementById("commit").scrollIntoView();
+          el.focus();
+        });
+      });
+    }
+  }
+
+  function summary(){
+    var lines = ["TRANSFORMATION READINESS ASSESSMENT", ""];
+    lines.push("READINESS PROFILE");
+    var low = lowestFactors();
+    low.results.forEach(function(r){
+      var b = band(r.s.total);
+      lines.push(r.f.id + ". " + r.f.short + ": " + (r.s.complete ? r.s.total + "/15 (" + b.label + ")" : "incomplete"));
+    });
+    if (low.allDone){
+      lines.push("", "LOWEST FACTOR");
+      low.list.forEach(function(r){ lines.push(r.f.id + ". " + r.f.name + " (" + r.s.total + "/15)"); lines.push("Suggested move: " + r.f.move); });
+    }
+    lines.push("", "MY COMMITMENT");
+    lines.push("The one move: " + (state.text.c_move || "—"));
+    lines.push("First step: " + (state.text.c_step || "—"));
+    lines.push("By when: " + (state.text.c_when || "—"));
+    return lines.join("\n");
+  }
+
+  document.getElementById("copyBtn").addEventListener("click", function(){
+    var text = summary(), toast = document.getElementById("toast");
+    function fallback(){
+      var fb = document.getElementById("fallback"), ta = document.getElementById("fallbackText");
+      ta.value = text; fb.style.display = "block"; ta.focus(); ta.select();
+      toast.textContent = "";
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(function(){ toast.textContent = "Summary copied. Paste it into an email or your notes."; setTimeout(function(){ toast.textContent=""; }, 4000); }, fallback);
+      } else fallback();
+    } catch(e){ fallback(); }
+  });
+
+  var armed = null;
+  function reset(e){
+    var btn = e.currentTarget;
+    if (armed !== btn){
+      if (armed) armed.textContent = "Start over";
+      armed = btn; btn.textContent = "Click again to clear everything";
+      setTimeout(function(){ if (armed === btn){ btn.textContent = "Start over"; armed = null; } }, 4000);
+      return;
+    }
+    btn.textContent = "Start over"; armed = null;
+    state = {scores:{}, text:{}}; save();
+    document.querySelectorAll("textarea[data-key],input[data-key]").forEach(function(el){ el.value = ""; });
+    document.querySelectorAll(".scale-btns").forEach(function(g){ g._paint(); });
+    document.getElementById("fallback").style.display = "none";
+    render(); window.scrollTo(0,0);
+  }
+  document.getElementById("resetBtn").addEventListener("click", reset);
+  document.getElementById("resetTop").addEventListener("click", reset);
+
+  render();
+})();
+</script>
+</body>
+</html>
